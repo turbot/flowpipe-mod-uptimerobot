@@ -8,8 +8,8 @@ mod "uptimerobot" {
   categories    = ["uptimerobot"]
 
   opengraph {
-    title       = "uptimerobot"
-    description = "Run pipelines and triggers that interact with uptimerobot."
+    title       = "UptimeRobot"
+    description = "Run pipelines and triggers that interact with UptimeRobot."
     image       = "/images/flowpipe/mods/turbot/uptimerobot-social-graphic.png"
   }
 }
