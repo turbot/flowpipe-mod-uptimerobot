@@ -1,9 +1,9 @@
-pipeline "update_monitor" {
-  title       = "Update a monitor in UptimeRobot"
-  description = "This pipeline updates a monitor in UptimeRobot using the UptimeRobot API key."
+pipeline "edit_monitor" {
+  title       = "Edit Monitor"
+  description = "Edit a monitor."
 
   param "api_key" {
-    description = "UptimeRobot API key for authentication."
+    description = local.api_key_param_description
     type        = string
     default     = var.api_key
   }
@@ -13,17 +13,17 @@ pipeline "update_monitor" {
     type        = string
   }
 
-  param "id" {
-    description = "The ID of the monitor to update."
+  param "monitor_id" {
+    description = "The ID of the monitor to be edited."
     type        = number
   }
 
   param "url" {
-    description = "The URL of the monitor."
+    description = "The URL/IP of the monitor."
     type        = string
   }
 
-  step "http" "update_monitor" {
+  step "http" "edit_monitor" {
     method = "POST"
     url    = "https://api.uptimerobot.com/v2/editMonitor"
     request_headers = {
@@ -34,7 +34,7 @@ pipeline "update_monitor" {
     request_body = jsonencode({
       api_key       = param.api_key
       friendly_name = param.friendly_name
-      id            = param.id
+      id            = param.monitor_id
       url           = param.url
       format        = "json"
       logs          = "1"
@@ -43,7 +43,7 @@ pipeline "update_monitor" {
   }
 
   output "monitor" {
-    description = "The uptimerobot monitor that was updated."
-    value       = step.http.update_monitor.response_body
+    value       = step.http.edit_monitor.response_body.monitor
+    description = "The updated monitor."
   }
 }

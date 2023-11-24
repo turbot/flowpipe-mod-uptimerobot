@@ -1,9 +1,9 @@
 pipeline "create_monitor" {
-  title       = "Create a monitor in UptimeRobot"
-  description = "This pipeline creates a monitor in UptimeRobot using the UptimeRobot API key."
+  title       = "Create Monitor"
+  description = "Create new monitors of any type."
 
   param "api_key" {
-    description = "UptimeRobot API key for authentication."
+    description = local.api_key_param_description
     type        = string
     default     = var.api_key
   }
@@ -14,12 +14,12 @@ pipeline "create_monitor" {
   }
 
   param "url" {
-    description = "The URL to monitor."
+    description = "The URL/IP of the monitor."
     type        = string
   }
 
   param "type" {
-    description = "The type of monitor (e.g., http, keyword, ping)."
+    description = "The type of the monitor. Possible values are 1. HTTP(s), 2. Keyword, 3. Ping, 4. Port, 5. Heartbeat."
     type        = number
   }
 
@@ -43,7 +43,7 @@ pipeline "create_monitor" {
   }
 
   output "monitor" {
-    description = "The uptimerobot monitor that was created."
-    value       = step.http.create_monitor.response_body
+    value       = step.http.create_monitor.response_body.monitor
+    description = "The created monitor."
   }
 }
