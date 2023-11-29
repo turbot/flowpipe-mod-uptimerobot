@@ -3,8 +3,8 @@ pipeline "list_monitors" {
   description = "Lists all the monitors in a user's account."
 
   param "api_key" {
-    description = local.api_key_param_description
     type        = string
+    description = local.api_key_param_description
     default     = var.api_key
   }
 
@@ -25,8 +25,8 @@ pipeline "list_monitors" {
   }
 
   output "monitors" {
-    value       = step.http.list_monitors.response_body.monitors
     description = "The list of monitors."
+    value       = step.http.list_monitors.response_body.monitors
   }
 
 }

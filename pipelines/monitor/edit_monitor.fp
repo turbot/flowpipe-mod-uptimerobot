@@ -3,24 +3,24 @@ pipeline "edit_monitor" {
   description = "Edit a monitor."
 
   param "api_key" {
-    description = local.api_key_param_description
     type        = string
+    description = local.api_key_param_description
     default     = var.api_key
   }
 
   param "friendly_name" {
-    description = "The friendly name of the Monitor."
     type        = string
+    description = "The friendly name of the Monitor."
   }
 
   param "monitor_id" {
-    description = "The ID of the monitor to be edited."
     type        = number
+    description = "The ID of the monitor to be edited."
   }
 
   param "url" {
-    description = "The URL/IP of the monitor."
     type        = string
+    description = "The URL/IP of the monitor."
   }
 
   step "http" "edit_monitor" {
@@ -43,7 +43,7 @@ pipeline "edit_monitor" {
   }
 
   output "monitor" {
-    value       = step.http.edit_monitor.response_body.monitor
     description = "The updated monitor."
+    value       = step.http.edit_monitor.response_body.monitor
   }
 }

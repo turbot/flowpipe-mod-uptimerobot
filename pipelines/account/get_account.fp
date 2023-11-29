@@ -3,8 +3,8 @@ pipeline "get_account" {
   description = "Get account details."
 
   param "api_key" {
-    description = local.api_key_param_description
     type        = string
+    description = local.api_key_param_description
     default     = var.api_key
   }
 
@@ -23,8 +23,8 @@ pipeline "get_account" {
   }
 
   output "account" {
-    value       = step.http.get_account.response_body.account
     description = "The account details."
+    value       = step.http.get_account.response_body.account
   }
 
 }

@@ -3,24 +3,48 @@ pipeline "create_monitor" {
   description = "Create new monitors of any type."
 
   param "api_key" {
-    description = local.api_key_param_description
     type        = string
+    description = local.api_key_param_description
     default     = var.api_key
   }
 
   param "friendly_name" {
-    description = "The friendly name of the Monitor."
     type        = string
+    description = "The friendly name of the Monitor."
   }
 
   param "url" {
-    description = "The URL/IP of the monitor."
     type        = string
+    description = "The URL/IP of the monitor."
   }
 
   param "type" {
-    description = "The type of the monitor. Possible values are 1. HTTP(s), 2. Keyword, 3. Ping, 4. Port, 5. Heartbeat."
     type        = number
+    description = "The type of the monitor. Possible values are 1. HTTP(s), 2. Keyword, 3. Ping, 4. Port, 5. Heartbeat."
+  }
+
+  param "sub_type" {
+    type        = number
+    description = "The sub-type of the monitor. Required for port monitoring. Possible values are 1. HTTP(80), 2. HTTPS(443), 3. FTP(21), 4. SMTP(25), 5. POP3(110), 6. IMAP(143), 99. Custom Port(99)."
+    optional    = true
+  }
+
+  param "port" {
+    type        = number
+    description = "The port of the monitor. Required for port monitoring."
+    optional    = true
+  }
+
+  param "keyword_type" {
+    type        = number
+    description = "The type of keyword monitoring. Required for keyword monitoring. Possible values are 1. Exists, 2. Not Exists."
+    optional    = true
+  }
+
+  param "keyword_value" {
+    type        = string
+    description = "The keyword value of the monitor. Required for keyword monitoring."
+    optional    = true
   }
 
   step "http" "create_monitor" {
@@ -32,18 +56,12 @@ pipeline "create_monitor" {
     }
 
     request_body = jsonencode({
-      api_key       = param.api_key
-      friendly_name = param.friendly_name
-      url           = param.url
-      type          = param.type
-      format        = "json"
-      logs          = "1"
+      for name, value in param : try(local.create_monitor_request_params[name], name) => value if contains(keys(local.create_monitor_request_params), name) && value != null
     })
-
   }
 
   output "monitor" {
-    value       = step.http.create_monitor.response_body.monitor
     description = "The created monitor."
+    value       = step.http.create_monitor.response_body.monitor
   }
 }
