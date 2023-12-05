@@ -8,9 +8,11 @@ pipeline "list_monitors" {
     default     = var.api_key
   }
 
+  # TODO: Add pagination support once flowpipe #339 is fixed.
   step "http" "list_monitors" {
     method = "POST"
     url    = "https://api.uptimerobot.com/v2/getMonitors"
+
     request_headers = {
       Content-Type  = "application/json"
       Cache-Control = "no-cache"
@@ -21,7 +23,6 @@ pipeline "list_monitors" {
       format  = "json"
       logs    = "1"
     })
-
   }
 
   output "monitors" {
