@@ -8,7 +8,7 @@ pipeline "list_monitors" {
     default     = var.default_cred
   }
 
-  # TODO: Add pagination support once flowpipe #339 is fixed.
+  # TODO: Add pagination support once https://github.com/turbot/flowpipe/issues/339 is resolved
   step "http" "list_monitors" {
     method = "POST"
     url    = "https://api.uptimerobot.com/v2/getMonitors"
