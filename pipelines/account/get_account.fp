@@ -2,10 +2,10 @@ pipeline "get_account" {
   title       = "Get Account"
   description = "Get account details."
 
-  param "api_key" {
+  param "cred" {
     type        = string
-    description = local.api_key_param_description
-    default     = var.api_key
+    description = local.cred_param_description
+    default     = var.default_cred
   }
 
   step "http" "get_account" {
@@ -17,7 +17,7 @@ pipeline "get_account" {
     }
 
     request_body = jsonencode({
-      api_key = param.api_key
+      api_key = credential.uptimerobot[param.cred].api_key
       format  = "json"
     })
   }
@@ -26,5 +26,4 @@ pipeline "get_account" {
     description = "The account details."
     value       = step.http.get_account.response_body.account
   }
-
 }

@@ -2,10 +2,10 @@ pipeline "edit_monitor" {
   title       = "Edit Monitor"
   description = "Edit a monitor."
 
-  param "api_key" {
+  param "cred" {
     type        = string
-    description = local.api_key_param_description
-    default     = var.api_key
+    description = local.cred_param_description
+    default     = var.default_cred
   }
 
   param "friendly_name" {
@@ -32,7 +32,7 @@ pipeline "edit_monitor" {
     }
 
     request_body = jsonencode({
-      api_key       = param.api_key
+      api_key       = credential.uptimerobot[param.cred].api_key
       friendly_name = param.friendly_name
       id            = param.monitor_id
       url           = param.url

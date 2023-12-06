@@ -1,8 +1,3 @@
-# Common descriptions
-locals {
-  api_key_param_description = "API key for your UptimeRobot account."
-}
-
 locals {
   create_monitor_request_params = {
     friendly_name = "friendly_name"
@@ -13,4 +8,9 @@ locals {
     keyword_type  = "keyword_type"
     keyword_value = "keyword_value"
   }
+}
+
+# Common descriptions
+locals {
+  cred_param_description = "Name for credentials to use. If not provided, the default credentials will be used."
 }

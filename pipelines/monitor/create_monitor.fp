@@ -2,10 +2,10 @@ pipeline "create_monitor" {
   title       = "Create Monitor"
   description = "Create new monitors of any type."
 
-  param "api_key" {
+  param "cred" {
     type        = string
-    description = local.api_key_param_description
-    default     = var.api_key
+    description = local.cred_param_description
+    default     = var.default_cred
   }
 
   param "friendly_name" {
@@ -55,9 +55,14 @@ pipeline "create_monitor" {
       Cache-Control = "no-cache"
     }
 
-    request_body = jsonencode({
-      for name, value in param : try(local.create_monitor_request_params[name], name) => value if contains(keys(local.create_monitor_request_params), name) && value != null
-    })
+    request_body = jsonencode(merge(
+      {
+        for name, value in param : try(local.create_monitor_request_params[name], name) => value if contains(keys(local.create_monitor_request_params), name) && value != null
+      },
+      {
+        api_key = credential.uptimerobot[param.cred].api_key
+      }
+    ))
   }
 
   output "monitor" {

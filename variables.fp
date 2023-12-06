@@ -1,4 +1,5 @@
-variable "api_key" {
+variable "default_cred" {
   type        = string
-  description = "API key for your UptimeRobot account."
+  description = "Name for the default credentials."
+  default     = "default"
 }

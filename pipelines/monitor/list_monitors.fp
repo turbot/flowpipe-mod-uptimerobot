@@ -2,10 +2,10 @@ pipeline "list_monitors" {
   title       = "List Monitors"
   description = "Lists all the monitors in a user's account."
 
-  param "api_key" {
+  param "cred" {
     type        = string
-    description = local.api_key_param_description
-    default     = var.api_key
+    description = local.cred_param_description
+    default     = var.default_cred
   }
 
   # TODO: Add pagination support once flowpipe #339 is fixed.
@@ -19,7 +19,7 @@ pipeline "list_monitors" {
     }
 
     request_body = jsonencode({
-      api_key = param.api_key
+      api_key = credential.uptimerobot[param.cred].api_key
       format  = "json"
       logs    = "1"
     })
