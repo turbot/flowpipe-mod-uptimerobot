@@ -5,7 +5,7 @@ pipeline "get_account" {
   param "cred" {
     type        = string
     description = local.cred_param_description
-    default     = var.default_cred
+    default     = "default"
   }
 
   step "http" "get_account" {
