@@ -2,6 +2,10 @@ pipeline "create_monitor" {
   title       = "Create Monitor"
   description = "Create new monitors of any type."
 
+  tags = {
+    type = "featured"
+  }
+
   param "cred" {
     type        = string
     description = local.cred_param_description
