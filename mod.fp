@@ -4,7 +4,7 @@ mod "uptimerobot" {
   color         = "#3BD771"
   documentation = file("./docs/index.md")
   icon          = "/images/flowpipe/mods/turbot/uptimerobot.svg"
-  categories    = ["uptimerobot"]
+  categories    = ["monitoring"]
 
   opengraph {
     title       = "UptimeRobot Mod for Flowpipe"
