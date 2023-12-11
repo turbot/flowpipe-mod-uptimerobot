@@ -43,7 +43,7 @@ pipeline "edit_monitor" {
   }
 
   output "monitor" {
-    description = "The updated monitor."
+    description = "The updated monitor details."
     value       = step.http.edit_monitor.response_body.monitor
   }
 }

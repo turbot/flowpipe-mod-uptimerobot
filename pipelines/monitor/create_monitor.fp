@@ -14,7 +14,7 @@ pipeline "create_monitor" {
 
   param "friendly_name" {
     type        = string
-    description = "The friendly name of the Monitor."
+    description = "The friendly name of the monitor."
   }
 
   param "url" {
@@ -70,7 +70,7 @@ pipeline "create_monitor" {
   }
 
   output "monitor" {
-    description = "The created monitor."
+    description = "The created monitor detials."
     value       = step.http.create_monitor.response_body.monitor
   }
 }
