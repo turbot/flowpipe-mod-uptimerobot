@@ -2,7 +2,7 @@ mod "uptimerobot" {
   title         = "UptimeRobot"
   description   = "Run pipelines to supercharge your UptimeRobot workflows using Flowpipe."
   color         = "#3BD771"
-  documentation = file("./docs/index.md")
+  documentation = file("./README.md")
   icon          = "/images/mods/turbot/uptimerobot.svg"
   categories    = ["monitoring"]
 
