@@ -8,6 +8,10 @@ UptimeRobot pipeline library for [Flowpipe](https://flowpipe.io) enabling seamle
 
 ## Getting Started
 
+### Requirements
+
+Docker daemon must be installed and running. Please see [Install Docker Engine](https://docs.docker.com/engine/install/) for more information.
+
 ### Installation
 
 Download and install Flowpipe (https://flowpipe.io/downloads). Or use Brew:
@@ -15,13 +19,6 @@ Download and install Flowpipe (https://flowpipe.io/downloads). Or use Brew:
 ```sh
 brew tap turbot/tap
 brew install flowpipe
-```
-
-Clone:
-
-```sh
-git clone https://github.com/turbot/flowpipe-mod-uptimerobot.git
-cd flowpipe-mod-uptimerobot
 ```
 
 ### Credentials
@@ -46,6 +43,55 @@ For more information on credentials in Flowpipe, please see [Managing Credential
 
 ### Usage
 
+[Initialize a mod](https://www.flowpipe.io/docs/mods/index#initializing-a-mod):
+
+```sh
+mkdir my_mod
+cd my_mod
+flowpipe mod init
+```
+
+[Install the UptimeRobot mod](https://www.flowpipe.io/docs/mods/mod-dependencies#mod-dependencies) as a dependency:
+
+```sh
+flowpipe mod install github.com/turbot/flowpipe-mod-uptimerobot
+```
+
+[Use the dependency](https://www.flowpipe.io/docs/mods/write-pipelines/index) in a pipeline step:
+
+```sh
+vi my_pipeline.fp
+```
+
+```hcl
+pipeline "my_pipeline" {
+
+  step "pipeline" "create_monitor" {
+    pipeline = uptimerobot.pipeline.create_monitor
+    args = {
+      friendly_name = "My New Monitor"
+      url           = "https://example.com"
+      type          = "1"
+    }
+  }
+}
+```
+
+[Run the pipeline](https://www.flowpipe.io/docs/run/pipelines):
+
+```sh
+flowpipe pipeline run my_pipeline
+```
+
+### Developing
+
+Clone:
+
+```sh
+git clone https://github.com/turbot/flowpipe-mod-uptimerobot.git
+cd flowpipe-mod-uptimerobot
+```
+
 List pipelines:
 
 ```sh
@@ -55,19 +101,13 @@ flowpipe pipeline list
 Run a pipeline:
 
 ```sh
-flowpipe pipeline run get_account
-```
-
-You can pass in pipeline arguments as well:
-
-```sh
 flowpipe pipeline run create_monitor --arg friendly_name="My New Monitor" --arg url="https://example.com" --arg type="1"
 ```
 
 To use a specific `credential`, specify the `cred` pipeline argument:
 
 ```sh
-flowpipe pipeline run create_monitor --arg cred=my_uptimerobot --arg friendly_name="My New Monitor" --arg url="https://example.com" --arg type="1"
+flowpipe pipeline run create_monitor --arg cred=uptimerobot_profile --arg friendly_name="My New Monitor" --arg url="https://example.com" --arg type="1"
 ```
 
 ## Open Source & Contributing
