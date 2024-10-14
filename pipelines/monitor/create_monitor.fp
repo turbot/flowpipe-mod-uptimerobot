@@ -6,10 +6,10 @@ pipeline "create_monitor" {
     type = "featured"
   }
 
-  param "cred" {
-    type        = string
-    description = local.cred_param_description
-    default     = "default"
+  param "conn" {
+    type        = connection.uptime_robot
+    description = local.conn_param_description
+    default     = connection.uptime_robot.default
   }
 
   param "friendly_name" {
@@ -64,7 +64,7 @@ pipeline "create_monitor" {
         for name, value in param : try(local.create_monitor_request_params[name], name) => value if contains(keys(local.create_monitor_request_params), name) && value != null
       },
       {
-        api_key = credential.uptimerobot[param.cred].api_key
+        api_key = param.conn.api_key
       }
     ))
   }

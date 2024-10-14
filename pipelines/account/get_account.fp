@@ -6,10 +6,10 @@ pipeline "get_account" {
     type = "featured"
   }
 
-  param "cred" {
-    type        = string
-    description = local.cred_param_description
-    default     = "default"
+  param "conn" {
+    type        = connection.uptime_robot
+    description = local.conn_param_description
+    default     = connection.uptime_robot.default
   }
 
   step "http" "get_account" {
@@ -21,7 +21,7 @@ pipeline "get_account" {
     }
 
     request_body = jsonencode({
-      api_key = credential.uptimerobot[param.cred].api_key
+      api_key = param.conn.api_key
       format  = "json"
     })
   }

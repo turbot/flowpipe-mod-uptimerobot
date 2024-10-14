@@ -17,25 +17,25 @@ brew tap turbot/tap
 brew install flowpipe
 ```
 
-### Credentials
+### Connections
 
 By default, the following environment variables will be used for authentication:
 
 - `UPTIMEROBOT_API_KEY`
 
-You can also create `credential` resources in configuration files:
+You can also create `connection` resources in configuration files:
 
 ```sh
 vi ~/.flowpipe/config/uptimerobot.fpc
 ```
 
 ```hcl
-credential "uptimerobot" "my_uptimerobot" {
+connection "uptime_robot" "my_uptimerobot" {
   api_key = "u1123455-ecaf32fwer633fdf4f33dd3c445"
 }
 ```
 
-For more information on credentials in Flowpipe, please see [Managing Credentials](https://flowpipe.io/docs/run/credentials).
+For more information on connections in Flowpipe, please see [Managing Connections](https://flowpipe.io/docs/run/connections).
 
 ### Usage
 
@@ -100,10 +100,10 @@ Run a pipeline:
 flowpipe pipeline run create_monitor --arg friendly_name="My New Monitor" --arg url="https://example.com" --arg type="1"
 ```
 
-To use a specific `credential`, specify the `cred` pipeline argument:
+To use a specific `connection`, specify the `conn` pipeline argument:
 
 ```sh
-flowpipe pipeline run create_monitor --arg cred=uptimerobot_profile --arg friendly_name="My New Monitor" --arg url="https://example.com" --arg type="1"
+flowpipe pipeline run create_monitor --arg conn=uptimerobot_profile --arg friendly_name="My New Monitor" --arg url="https://example.com" --arg type="1"
 ```
 
 ## Open Source & Contributing
