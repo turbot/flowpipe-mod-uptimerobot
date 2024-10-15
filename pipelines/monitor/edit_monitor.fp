@@ -3,9 +3,9 @@ pipeline "edit_monitor" {
   description = "Edit a monitor."
 
   param "conn" {
-    type        = connection.uptime_robot
+    type        = connection.uptimerobot
     description = local.conn_param_description
-    default     = connection.uptime_robot.default
+    default     = connection.uptimerobot.default
   }
 
   param "friendly_name" {

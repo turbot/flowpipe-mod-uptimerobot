@@ -3,9 +3,9 @@ pipeline "list_monitors" {
   description = "Lists all the monitors in a user's account."
 
   param "conn" {
-    type        = connection.uptime_robot
+    type        = connection.uptimerobot
     description = local.conn_param_description
-    default     = connection.uptime_robot.default
+    default     = connection.uptimerobot.default
   }
 
   # TODO: Add pagination support once https://github.com/turbot/flowpipe/issues/339 is resolved

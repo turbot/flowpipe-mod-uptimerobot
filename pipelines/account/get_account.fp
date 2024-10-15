@@ -7,9 +7,9 @@ pipeline "get_account" {
   }
 
   param "conn" {
-    type        = connection.uptime_robot
+    type        = connection.uptimerobot
     description = local.conn_param_description
-    default     = connection.uptime_robot.default
+    default     = connection.uptimerobot.default
   }
 
   step "http" "get_account" {
