@@ -103,7 +103,7 @@ flowpipe pipeline run create_monitor --arg friendly_name="My New Monitor" --arg 
 To use a specific `connection`, specify the `conn` pipeline argument:
 
 ```sh
-flowpipe pipeline run create_monitor --arg conn=uptimerobot_profile --arg friendly_name="My New Monitor" --arg url="https://example.com" --arg type="1"
+flowpipe pipeline run create_monitor --arg conn=connection.uptime_robot.my_uptimerobot --arg friendly_name="My New Monitor" --arg url="https://example.com" --arg type="1"
 ```
 
 ## Open Source & Contributing
