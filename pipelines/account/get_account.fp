@@ -3,7 +3,7 @@ pipeline "get_account" {
   description = "Get account details."
 
   tags = {
-    type = "featured"
+    recommended = "true"
   }
 
   param "conn" {

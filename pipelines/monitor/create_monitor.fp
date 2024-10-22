@@ -3,7 +3,7 @@ pipeline "create_monitor" {
   description = "Create new monitors of any type."
 
   tags = {
-    type = "featured"
+    recommended = "true"
   }
 
   param "conn" {
