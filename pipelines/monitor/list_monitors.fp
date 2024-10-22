@@ -2,10 +2,10 @@ pipeline "list_monitors" {
   title       = "List Monitors"
   description = "Lists all the monitors in a user's account."
 
-  param "cred" {
-    type        = string
-    description = local.cred_param_description
-    default     = "default"
+  param "conn" {
+    type        = connection.uptimerobot
+    description = local.conn_param_description
+    default     = connection.uptimerobot.default
   }
 
   # TODO: Add pagination support once https://github.com/turbot/flowpipe/issues/339 is resolved
@@ -19,7 +19,7 @@ pipeline "list_monitors" {
     }
 
     request_body = jsonencode({
-      api_key = credential.uptimerobot[param.cred].api_key
+      api_key = param.conn.api_key
       format  = "json"
       logs    = "1"
     })
